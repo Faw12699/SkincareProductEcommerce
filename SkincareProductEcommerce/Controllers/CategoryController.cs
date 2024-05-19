@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SkincareProductEcommerce.Data;
 using SkincareProductEcommerce.Models;
+using SkincareProductEcommerce.Utility;
 
 namespace SkincareProductEcommerce.Controllers
 {
+    [Authorize(Roles = Role.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
