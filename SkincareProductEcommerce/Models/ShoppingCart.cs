@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkincareProductEcommerce.Models
@@ -10,6 +11,7 @@ namespace SkincareProductEcommerce.Models
         [ForeignKey("ProductId")]
         [ValidateNever]
         public Product Product { get; set; }
+        [Range(1,100)]
         public int Count { get; set; }
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]

@@ -4,6 +4,8 @@ using SkincareProductEcommerce.Data;
 using SkincareProductEcommerce.Models;
 using SkincareProductEcommerce.Models.ViewModels;
 using SkincareProductEcommerce.Utility;
+using Stripe.Checkout;
+using System;
 using System.Security.Claims;
 
 namespace SkincareProductEcommerce.Controllers
@@ -96,7 +98,90 @@ namespace SkincareProductEcommerce.Controllers
                 _db.OrderDetails.Add(orderDetails);
                 _db.SaveChanges();
             }
-            return View(shoppingCartVM);
+
+            var domain = "https://localhost:7034/";
+            var options = new SessionCreateOptions
+            {
+                SuccessUrl = domain + $"cart/OrderConfirmation?id={shoppingCartVM.OrderHeader.Id}",
+                CancelUrl = domain + "cart/index",
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+            };
+
+            foreach (var item in shoppingCartVM.ShoppingCartList)
+            {
+                var sessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(item.Product.Price * 100), // $20.50 => 2050
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.Product.Name
+                        }
+                    },
+                    Quantity = item.Count
+                };
+                options.LineItems.Add(sessionLineItem);
+            }
+
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+            UpdateStripePaymentID(shoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+            Response.Headers.Add("Location", session.Url);
+            return new StatusCodeResult(303);
+        }
+        public IActionResult OrderConfirmation(int id)
+        {
+            OrderHeader orderheader = _db.OrderHeaders.Include(u => u.ApplicationUser).FirstOrDefault(u => u.Id == id);
+
+            var service = new SessionService();
+            Session session = service.Get(orderheader.SessionId);
+
+            if (session.PaymentStatus.ToLower() == "paid")
+            {
+                UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+                UpdateStatus(id, Status.StatusApproved, Status.PaymentStatusApproved);
+            }
+
+            List<ShoppingCart> shoppingCart = _db.ShoppingCarts.Where(u => u.ApplicationUserId == orderheader.ApplicationUserId).ToList();
+            _db.ShoppingCarts.RemoveRange(shoppingCart);
+            _db.SaveChanges();
+
+            return View(id);
+        }
+        // Updating Status of Order and Payment 
+        public void UpdateStatus(int id, string orderStatus, string paymentStatus)
+        {
+            var orderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.Id == id);
+            if (orderFromDb !=null)
+            {
+                orderFromDb.OrderStatus = orderStatus;
+                if (!string.IsNullOrEmpty(paymentStatus))
+                {
+                    orderFromDb.PayementStatus = paymentStatus;
+
+                    _db.OrderHeaders.Update(orderFromDb);
+                    _db.SaveChanges();
+                }
+            }
+        }
+        public void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId)
+        {
+            var orderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.Id == id);
+            if (!string.IsNullOrEmpty(sessionId)) 
+            {
+                orderFromDb.SessionId = sessionId;
+            }
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                orderFromDb.PaymentIntentId = paymentIntentId;
+                orderFromDb.PaymentDate = DateTime.Now;
+            }
+            _db.OrderHeaders.Update(orderFromDb);
+            _db.SaveChanges();
         }
         public IActionResult Plus(int cartId)
         {
