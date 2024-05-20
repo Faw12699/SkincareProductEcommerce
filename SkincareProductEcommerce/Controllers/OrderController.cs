@@ -34,7 +34,6 @@ namespace SkincareProductEcommerce.Controllers
             return View(orderViewModel);
         }
         [HttpPost]
-        //[Authorize(Role.Role_Admin)]
         public IActionResult UpdateOrderDetails(OrderViewModel OrderVM)
         {
             var orderHeaderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id);
@@ -57,7 +56,7 @@ namespace SkincareProductEcommerce.Controllers
 
             TempData["Success"] = "Order Details Updated Successfully.";
 
-            return RedirectToAction("Index", new { id = orderHeaderFromDb.Id });
+            return RedirectToAction("Index");
         }
         
         [HttpPost]

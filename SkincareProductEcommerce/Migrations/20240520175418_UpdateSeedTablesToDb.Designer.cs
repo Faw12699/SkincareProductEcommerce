@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SkincareProductEcommerce.Data;
 
@@ -11,9 +12,11 @@ using SkincareProductEcommerce.Data;
 namespace SkincareProductEcommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240520175418_UpdateSeedTablesToDb")]
+    partial class UpdateSeedTablesToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,25 +257,19 @@ namespace SkincareProductEcommerce.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Cleansers & Lotions"
+                            Name = "History"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 3,
-                            Name = "Face Masks"
+                            Name = "Sci-fi"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 2,
-                            Name = "Face Serums"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DisplayOrder = 2,
-                            Name = "Creams and Emulsions"
+                            Name = "Action"
                         });
                 });
 
@@ -422,9 +419,9 @@ namespace SkincareProductEcommerce.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
+                            Description = "A lightweight serum that hydrates and plumps skin",
                             ImageUrl = "",
-                            Name = "Purifying Light Foam",
+                            Name = "Hydrating Serum",
                             Price = 25.0,
                             Size = "30ml"
                         },
@@ -432,39 +429,39 @@ namespace SkincareProductEcommerce.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
+                            Description = "Gentle cleanser for acne-prone skin",
                             ImageUrl = "",
-                            Name = "Hydra-Mask",
+                            Name = "Acne Cleanser ",
                             Price = 15.0,
                             Size = "150ml"
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 2,
-                            Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
+                            CategoryId = 1,
+                            Description = "Brightening cream enriched with Vitamin C",
                             ImageUrl = "",
-                            Name = "Anti-Age Defence Mask",
+                            Name = "Vitamin C Cream",
                             Price = 30.0,
                             Size = "50ml"
                         },
                         new
                         {
                             Id = 4,
-                            CategoryId = 1,
-                            Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
+                            CategoryId = 3,
+                            Description = "Anti-aging serum with retinol",
                             ImageUrl = "",
-                            Name = "Micellar Water Face & Eyes",
+                            Name = "Retinol Serum",
                             Price = 35.0,
                             Size = "50ml"
                         },
                         new
                         {
                             Id = 5,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
+                            CategoryId = 2,
+                            Description = "Broad-spectrum sunscreen with SPF",
                             ImageUrl = "",
-                            Name = "Anti-Age Booster Serum",
+                            Name = "SPF 50 Sunscreen",
                             Price = 20.0,
                             Size = "100ml"
                         });

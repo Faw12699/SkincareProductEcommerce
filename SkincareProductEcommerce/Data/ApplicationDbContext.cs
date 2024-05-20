@@ -23,16 +23,17 @@ namespace SkincareProductEcommerce.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "History", DisplayOrder = 1 },
-                new Category { Id = 2, Name = "Sci-fi", DisplayOrder = 3 },
-                new Category { Id = 3, Name = "Action", DisplayOrder = 2 }
+                new Category { Id = 1, Name = "Cleansers & Lotions", DisplayOrder = 1 },
+                new Category { Id = 2, Name = "Face Masks", DisplayOrder = 3 },
+                new Category { Id = 3, Name = "Face Serums", DisplayOrder = 2 },
+                new Category { Id = 4, Name = "Creams and Emulsions", DisplayOrder = 2 }
                 );
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
                     Id = 1,
-                    Name = "Hydrating Serum",
-                    Description = "A lightweight serum that hydrates and plumps skin",
+                    Name = "Purifying Light Foam",
+                    Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
                     Price = 25,
                     Size = "30ml",
                     CategoryId = 1,
@@ -41,8 +42,8 @@ namespace SkincareProductEcommerce.Data
                 new Product
                 {
                     Id = 2,
-                    Name = "Acne Cleanser ",
-                    Description = "Gentle cleanser for acne-prone skin",
+                    Name = "Hydra-Mask",
+                    Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
                     Price = 15,
                     Size = "150ml",
                     CategoryId = 2,
@@ -51,31 +52,31 @@ namespace SkincareProductEcommerce.Data
                 new Product
                 {
                     Id = 3,
-                    Name = "Vitamin C Cream",
-                    Description = "Brightening cream enriched with Vitamin C",
+                    Name = "Anti-Age Defence Mask",
+                    Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
                     Price = 30,
+                    Size = "50ml",
+                    CategoryId = 2,
+                    ImageUrl = ""
+                },
+                new Product
+                {
+                    Id = 4,
+                    Name = "Micellar Water Face & Eyes",
+                    Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
+                    Price = 35,
                     Size = "50ml",
                     CategoryId = 1,
                     ImageUrl = ""
                 },
                 new Product
                 {
-                    Id = 4,
-                    Name = "Retinol Serum",
-                    Description = "Anti-aging serum with retinol",
-                    Price = 35,
-                    Size = "50ml",
-                    CategoryId = 3,
-                    ImageUrl = ""
-                },
-                new Product
-                {
                     Id = 5,
-                    Name = "SPF 50 Sunscreen",
-                    Description = "Broad-spectrum sunscreen with SPF",
+                    Name = "Anti-Age Booster Serum",
+                    Description = "Lorem ipsum dolor sit amet. Non praesentium quia ut rerum nihil ab esse quisquam ut nemo Quis eum tempore minus ad mollitia delectus ut illum commodi. Vel galisum rerum est harum debitis est odio dicta et fugiat dicta ut quia molestias hic maiores nemo et molestiae ullam. Ab sint expedita et voluptatem fugiat quo commodi harum ea iusto molestiae. ",
                     Price = 20,
                     Size = "100ml",
-                    CategoryId = 2,
+                    CategoryId = 3,
                     ImageUrl = ""
                 }
                 );
