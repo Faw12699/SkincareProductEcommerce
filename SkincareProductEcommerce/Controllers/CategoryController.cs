@@ -17,6 +17,7 @@ namespace SkincareProductEcommerce.Controllers
         }
         public IActionResult Index()
         {
+            // list of categories
             List<Category> categoryList=_db.Categories.ToList();
             return View(categoryList);
         }

@@ -8,6 +8,7 @@ namespace SkincareProductEcommerce.Models
     public class OrderHeader
     {
         public int Id { get; set; }
+        [ValidateNever]
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
